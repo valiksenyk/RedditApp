@@ -10,7 +10,13 @@ export class CommentService {
       try {
         comment.isMy = true;
         comment.id = this._generateId();
-        localStorage.setItem(articleId, JSON.stringify(comment));
+        if (localStorage.getItem(articleId) === null) {
+          localStorage.setItem(articleId, JSON.stringify([comment]));
+        } else {
+          const comments = JSON.parse(localStorage.getItem(articleId));
+          comments.push(comment);
+          localStorage.setItem(articleId, JSON.stringify(comments));
+        }
         observer.next(comment)
       } catch (e) {
         observer.error(e);

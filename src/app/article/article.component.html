@@ -20,7 +20,7 @@
     <p><fa name="calendar"></fa>{{article.date + '000' | date}}</p>
     <p><fa name="user"></fa>{{article.author}}</p>
     <p><fa name="link"></fa>
-      <a target="_blank" [href]="'https://redd.it/' + article.id">go to original</a></p>
+      <a target="_blank" [href]="redditOrigin + article.id">go to original</a></p>
   </div>
 </div>
 <div *ngIf="!isLoading" class="add-comment-container">

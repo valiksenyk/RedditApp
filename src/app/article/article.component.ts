@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CommunicationService} from "../services/communication.service";
 import {IPost} from "../list/list.component";
 import {CommentService} from "../services/comment.service";
+import {APP_CONFIG, IAppConfig} from "../app.config";
 
 export interface IComment {
   id?: string,
@@ -10,6 +11,7 @@ export interface IComment {
   body: string,
   date: any
   isMy?: boolean;
+  subcomments?: Array<any>;
 }
 
 @Component({
@@ -23,11 +25,14 @@ export class ArticleComponent implements OnInit {
   article: IPost = null;
   comments: Array<any> = [];
   commentModel: string;
+  redditOrigin: string;
   isLoading: boolean;
 
-  constructor(private _route: ActivatedRoute,
+  constructor(@Inject(APP_CONFIG) private _config: IAppConfig,
+              private _route: ActivatedRoute,
               private _communicationService: CommunicationService,
               private _commentService: CommentService) {
+    this.redditOrigin = _config.redditOrigin;
   }
 
   ngOnInit() {
@@ -35,17 +40,20 @@ export class ArticleComponent implements OnInit {
     this.id = this._route.snapshot.paramMap.get('id');
     this._communicationService.getArticle(this.id)
       .subscribe((res) => {
-        console.log(res);
         this.article = this._createArticlesObj(res[0].data.children[0].data);
         this._parseComments(res[1]);
         this.isLoading = false;
       });
 
     this._commentService.getOwnComments(this.id)
-      .subscribe((comment: IComment) => {
-        if (comment) {
-          comment.date = new Date(comment.date).getTime();
-          this.comments.push(comment);
+      .subscribe((comments: Array<any>) => {
+        if (comments) {
+          for (let comment of comments) {
+            if (comment) {
+              comment.date = new Date(comment.date).getTime();
+              this.comments.push(comment);
+            }
+          }
         }
       })
   }
@@ -78,9 +86,13 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  private _parseComments(comments) {
+  private _parseComments(comments) { //recursively extract comments
     if (comments.data.children) {
       for (let child of comments.data.children) {
+        if (child.data.replies && child.data.replies.data.children) {
+          this.comments.push(this._createCommentObj(child.data));
+          this._parseComments(child.data.replies);
+        }
         this.comments.push(this._createCommentObj(child.data))
       }
     }
