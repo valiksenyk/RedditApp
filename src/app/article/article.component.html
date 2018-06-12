@@ -1,0 +1,44 @@
+<div class="main-wrapper">
+  <div *ngIf="isLoading" class="loader">
+    <fa name="spinner" size="5x" animation="spin"></fa>
+  </div>
+<div *ngIf="!isLoading" class="article-wrapper">
+  <div class="title-container">
+    <p class="title">{{article.title}}</p>
+  </div>
+  <div class="main-container">
+    <div class="image-container">
+      <img [src]="article.image" alt="">
+    </div>
+    <div class="text-container">
+      <p class="text">{{article.text}}</p>
+    </div>
+  </div>
+  <hr>
+  <div class="additional-info-container">
+    <p><fa name="comments"></fa>{{comments.length}}</p>
+    <p><fa name="calendar"></fa>{{article.date + '000' | date}}</p>
+    <p><fa name="user"></fa>{{article.author}}</p>
+    <p><fa name="link"></fa>
+      <a target="_blank" [href]="'https://redd.it/' + article.id">go to original</a></p>
+  </div>
+</div>
+<div *ngIf="!isLoading" class="add-comment-container">
+  <textarea [(ngModel)]="commentModel" name="comment"></textarea>
+  <button [disabled]="!commentModel" (click)="save()" type="button" class="btn btn-info">Save</button>
+</div>
+
+<div *ngFor="let comment of comments"  class="comments-container">
+  <div class="comment-head">
+    <div class="comment-author">
+      <p class="author"><fa name="user"></fa>{{comment.author}}</p>
+    </div>
+  </div>
+  <div class="comment-body">
+    <p>{{comment.body}}</p>
+  </div>
+  <div class="comment-additional">
+    <p class="date"><fa name="calendar"></fa>{{comment.isMy === true ? (comment.date | date) : (comment.date + '000' | date)}}</p>
+  </div>
+</div>
+</div>

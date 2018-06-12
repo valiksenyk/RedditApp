@@ -1,0 +1,14 @@
+<div class="article-wrapper">
+  <div class="preview-wrapp">
+    <img [src]="article.image" alt="">
+  </div>
+  <div class="main-content">
+    <div>
+      <p class="title">{{article.title}}</p>
+    </div>
+    <div class="additional">
+      <p><fa name="comments"></fa>{{article.commentsCount}}</p>
+      <p><fa name="calendar"></fa>{{article.date + '000' | date}}</p>
+    </div>
+  </div>
+</div>

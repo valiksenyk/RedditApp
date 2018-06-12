@@ -1,0 +1,113 @@
+@import "../../assets/styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  margin-top: 52px;
+  color: $text-color;
+  font-family: Lato;
+
+  .loader {
+    margin-top: 100px;
+  }
+
+  .article-wrapper {
+    margin-top: 30px;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+    background: $white;
+    padding: 20px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .2);
+
+    .title-container {
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        color: $text-color;
+      }
+    }
+
+    .main-container {
+      display: flex;
+
+      .image-container {
+        width: 30%;
+
+        img {
+          max-width: 100%;
+        }
+      }
+
+      .text-container {
+        width: 70%;
+
+        p {
+          padding: 0 20px;
+        }
+      }
+
+    }
+
+    .additional-info-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    hr {
+      width: 100%;
+      border-top: 1px solid $hr-grey;
+    }
+  }
+
+  .add-comment-container {
+    width: 60%;
+    background: $comment-background;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 3px rgba(0, 0, 0, .2);
+    flex-direction: column;
+    align-items: center;
+    height: 90px;
+    margin-bottom: 20px;
+
+    textarea {
+      width: 80%;
+      resize: none;
+      font-family: lato;
+      border-color: $textarea-grey;
+    }
+
+    button {
+      width: 12%;
+      margin: 5px 5px 50px 5px;
+    }
+  }
+
+  .comments-container {
+    width: 60%;
+    background: #f3f6f8;
+    margin: 15px 0 25px 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.2);
+    font-family: lato;
+    padding: 15px;
+
+    .author, .date {
+      color: $head-blue;
+    }
+  }
+}

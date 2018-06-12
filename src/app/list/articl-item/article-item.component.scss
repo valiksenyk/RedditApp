@@ -1,0 +1,39 @@
+@import "../../../assets/styles/variables.scss";
+
+.article-wrapper {
+  display: flex;
+  height: 75px;
+  padding: 3px 3px 3px 20px;
+  cursor: pointer;
+  font-family: Lato;
+  background: $white;
+  color: $text-color;
+
+  &:hover {
+    background: $item-hover;
+  }
+
+  .preview-wrapp {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 75px;
+      max-height: 43px;
+    }
+  }
+
+  .additional {
+    display: flex;
+
+    p {
+      margin: 0 10px;
+      color: $text-color;
+    }
+  }
+
+  .comments-count {
+    color: $blue !important;
+  }
+}

@@ -1,0 +1,14 @@
+<div *ngIf="!showError" class="list-wrapper"  data-infinite-scroll
+     debounce
+     [scrollWindow]="false"
+     [infiniteScrollDistance]="scrollDistance"
+     [infiniteScrollUpDistance]="scrollUpDistance"
+     [infiniteScrollThrottle]="throttle"
+     (scrolled)="loadMore()">
+  <app-article-item *ngFor="let article of list" [article]="article"
+                    [routerLink]="['/article', article.id]"></app-article-item>
+</div>
+
+<div class="error" *ngIf="showError">
+  <h3>Error, not found subreddit</h3>
+</div>

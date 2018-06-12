@@ -1,0 +1,19 @@
+.list-wrapper {
+  width: 100%;
+  margin-top: 60px;
+  overflow: auto;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  app-article-item {
+    width: 80%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+  }
+}
+
+.error {
+  margin-top: 70px;
+  text-align: center;
+}
